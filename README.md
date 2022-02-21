@@ -41,8 +41,8 @@ app.Run();
 
 ## ui
 
-![ui](./ui.png)
+![ui](https://raw.githubusercontent.com/Snuger/Swashbuckle.AspNetCore.Swagger.ExportExtension/main/ui.png)
 
 ## MarkDown file
 
-![MarkDown](./file.png)
+![MarkDown](https://raw.githubusercontent.com/Snuger/Swashbuckle.AspNetCore.Swagger.ExportExtension/main/file.png)
