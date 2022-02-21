@@ -68,13 +68,13 @@ namespace Swashbuckle.AspNetCore.Swagger.ExportExtension.SwaggerDocGen
                     var (responseExapmle, responseSchema) = GetResponses(operation.Responses);                
                     row.AppendLine(title.H(2));//接口名称
                     row.AppendLine();
-                    row.AppendLine("基本信息".H(3).NewLine());//基本信息
+                    row.AppendLine("Basic Information".H(3).NewLine());//基本信息
                     row.AppendLine();
-                    row.AppendLine($"{"接口地址：".B()}{url}".Li().NewLine());
-                    row.AppendLine($"{"请求方式：".B()}{method}".Li().NewLine());
+                    row.AppendLine($"{"Url：".B()}{url}".Li().NewLine());
+                    row.AppendLine($"{"Request Method：".B()}{method}".Li().NewLine());
                     if (method == "Post" || method == "Put")
                     {
-                        row.AppendLine($"{"请求类型：".B()}{contentType}".Li().NewLine());
+                        row.AppendLine($"{"Media type".B()}{contentType}".Li().NewLine());
                     }
                     if (string.IsNullOrWhiteSpace(query) == false)//Query
                     {
@@ -121,7 +121,7 @@ namespace Swashbuckle.AspNetCore.Swagger.ExportExtension.SwaggerDocGen
             var isFirst = true;
             foreach (var parameter in apiParameters)
             {
-                var queryTitle = "|参数名称|参数类型|参数位置|描述|".NewLine();
+                var queryTitle = "|Name|Type|Location|Description|".NewLine();
                 queryTitle += "|:----:|:----:|:----:|:----:|".NewLine();
                 var queryStr = $"|{parameter.Name}|{parameter.Schema.Type ?? parameter.Schema.Reference.Id}|{parameter.In}|{parameter.Description}|".NewLine();
                 str += isFirst ? $"{queryTitle}{queryStr}" : queryStr;
@@ -282,10 +282,10 @@ namespace Swashbuckle.AspNetCore.Swagger.ExportExtension.SwaggerDocGen
             if (schema.Properties.Any() == false)
                 return new EnumInfo()
                 {
-                    枚举范围 = GetEnumValues(key),
-                    枚举描述 = schema.Description,
-                    枚举类型 = schema.Format,
-                    枚举名称 = key
+                    Range = GetEnumValues(key),
+                    Description = schema.Description,
+                    Type = schema.Format,
+                    Name = key
                 };
             var properties = new Dictionary<string, object>();
             foreach (var item in schema.Properties)
@@ -314,10 +314,10 @@ namespace Swashbuckle.AspNetCore.Swagger.ExportExtension.SwaggerDocGen
                     var enumObj = GetEnumSchema(enumKey);
                     obj = new EnumInfo()
                     {
-                        枚举范围 = GetEnumValues(enumKey),
-                        枚举类型 = enumObj.Format,
-                        枚举名称 = enumKey,
-                        枚举描述 = enumObj.Description
+                        Range = GetEnumValues(enumKey),
+                        Type = enumObj.Format,
+                        Name = enumKey,
+                        Description = enumObj.Description
                     };
                 }
                 else
@@ -329,10 +329,10 @@ namespace Swashbuckle.AspNetCore.Swagger.ExportExtension.SwaggerDocGen
                 {
                     var requestModelInfo = new RequestModelInfo
                     {
-                        参数类型 = obj,
-                        描述 = item.Value.Description,
-                        是否必传 = schema.Required.Any(x => x == item.Key),
-                        可空类型 = item.Value.Nullable
+                        Type = obj,
+                        Description = item.Value.Description,
+                        Required = schema.Required.Any(x => x == item.Key),
+                        Nullable = item.Value.Nullable
                     };
                     properties.Add(item.Key, requestModelInfo);
                 }
@@ -340,9 +340,9 @@ namespace Swashbuckle.AspNetCore.Swagger.ExportExtension.SwaggerDocGen
                 {
                     var responseModelInfo = new ResponseModelInfo
                     {
-                        参数类型 = obj,
-                        描述 = item.Value.Description,
-                        可空类型 = item.Value.Nullable
+                        Type = obj,
+                        Description = item.Value.Description,
+                        Nullable = item.Value.Nullable
                     };
                     properties.Add(item.Key, responseModelInfo);
                 }

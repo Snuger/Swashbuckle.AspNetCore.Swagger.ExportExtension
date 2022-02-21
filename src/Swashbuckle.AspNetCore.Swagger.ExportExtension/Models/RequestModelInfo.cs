@@ -12,6 +12,6 @@ namespace Swashbuckle.AspNetCore.Swagger.ExportExtension.Models
         /// <summary>
         /// 是否必传
         /// </summary>
-        public bool 是否必传 { get; set; }
+        public bool Required { get; set; }
     }
 }

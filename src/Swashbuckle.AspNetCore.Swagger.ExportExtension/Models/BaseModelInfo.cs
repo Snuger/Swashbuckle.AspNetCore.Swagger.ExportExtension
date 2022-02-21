@@ -12,14 +12,14 @@ namespace Swashbuckle.AspNetCore.Swagger.ExportExtension.Models
         /// <summary>
        /// 参数类型
        /// </summary>
-        public object 参数类型 { get; set; }
+        public object Type { get; set; }
         /// <summary>
         /// 描述
         /// </summary>
-        public string 描述 { get; set; }
+        public string Description { get; set; }
         /// <summary>
         /// 可空类型
         /// </summary>
-        public bool 可空类型 { get; set; }
+        public bool Nullable { get; set; }
     }
 }

@@ -12,18 +12,18 @@ namespace Swashbuckle.AspNetCore.Swagger.ExportExtension.Models
         /// <summary>
         /// 枚举类型
         /// </summary>
-        public string 枚举名称 { get; set; }
+        public string Name { get; set; }
         /// <summary>
         /// 枚举值类型
         /// </summary>
-        public string 枚举类型 { get; set; }
+        public string Type { get; set; }
         /// <summary>
         /// 枚举值
         /// </summary>
-        public int[] 枚举范围 { get; set; }
+        public int[] Range { get; set; }
         /// <summary>
         /// 描述
         /// </summary>
-        public string 枚举描述 { get; set; }
+        public string Description { get; set; }
     }
 }

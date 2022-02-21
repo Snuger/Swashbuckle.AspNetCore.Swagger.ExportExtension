@@ -35,10 +35,14 @@ namespace Swashbuckle.AspNetCore.Swagger.ExportExtension.Middleware
         }
 
         public async Task InvokeAsync(HttpContext context)
-        {          
+        {
             if (RequestingSwaggerExport(context.Request))
+            {
                 await ExportApiDocument(context);
-            await _staticFileMiddleware.Invoke(context);
+            }
+            else {
+                await _staticFileMiddleware.Invoke(context);
+            }   
         }
 
         /// <summary>
@@ -68,9 +72,7 @@ namespace Swashbuckle.AspNetCore.Swagger.ExportExtension.Middleware
                 await fs.WriteAsync(byteArray, 0, byteArray.Length);
             var downloadFile = new FileInfo(makeDownFilePath);
             context.Response.ContentType = "application/octet-stream";
-            //context.Response.Headers.Add("Content-Length", downloadFile.Length.ToString());
             context.Response.Headers.Add("Content-Disposition", "attachment; filename=*.md");
-            //context.Response.Headers.Add("Content-Transfer-Encoding", "binary");
             await context.Response.SendFileAsync(new PhysicalFileInfo(new FileInfo(makeDownFilePath)), 0, downloadFile.Length);
         }
 
